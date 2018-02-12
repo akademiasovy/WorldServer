@@ -22,9 +22,14 @@ public class World {
         MySQL mySQL=new MySQL();
        List<String> list= mySQL.getCountries();
         System.out.println(list);
+        boolean b= false;
        String result= "{\"name\":[";
         for(String temp:list){
-
+            if(b==true){
+                result+=',';
+            }
+            else
+               b=true;
             result+="\""+temp+"\"";
         }
         result+="]}";
