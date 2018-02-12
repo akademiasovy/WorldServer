@@ -23,7 +23,7 @@ public class World {
        List<String> list= mySQL.getCountries();
         System.out.println(list);
         boolean b= false;
-       String result= "{\"name\":[";
+       String result= "func({\"name\":[";
         for(String temp:list){
             if(b==true){
                 result+=',';
@@ -32,7 +32,7 @@ public class World {
                b=true;
             result+="\""+temp+"\"";
         }
-        result+="]}";
+        result+="]})";
 
         return result;
     }
