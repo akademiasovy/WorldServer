@@ -34,4 +34,26 @@ public class MySQL {
         }
         return list;
     }
+
+    public List<String> getCities(String country){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "SELECT city.Name from city "+
+                    " INNER JOIN country ON country.code=city.countrycode "+
+                    " WHERE country.name like '"+country+"'";
+            System.out.println(query);
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String name=rs.getString("name");
+                list.add(name);
+            }
+
+        }catch(Exception ex){
+            System.out.println("Error: "+ ex.getMessage());
+        }
+        return list;
+    }
 }
