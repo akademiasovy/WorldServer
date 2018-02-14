@@ -53,18 +53,19 @@ $(document).ready(function() {
     $.ajax({
 
            url: 'http://localhost:8080/world/population',
-           data : JSON.stringify{ "name": $(this).val() } ,
+           data : JSON.stringify({ "name": $(this).val() }) ,
            error : function(){
                $("#error").html("chyba");
            },
-     success : showCities,
+     success : showPopulation,
            crossDomain: true,
            dataType: 'jsonp',
            jsonpCallback: 'showPopulation',
        contentType: 'application/json',
        type:'POST'
     });
-  }
-  function showCities(data){
+  });
+
+  function showPopulation(data){
   }
 });
