@@ -1,5 +1,6 @@
 package sk.akademiasovy.world.resources;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 import sk.akademiasovy.world.db.MySQL;
 
@@ -58,4 +59,17 @@ public class World {
         return result;
     }
 
+    @POST
+    @Path("/population")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getPopulation(City city) {
+
+         String population=new MySQL().getPopulation(city.name);
+         return population;
+    }
+
+    public static class City{
+        @JsonProperty("name")
+        public String name;
+    }
 }

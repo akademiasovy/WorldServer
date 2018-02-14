@@ -56,4 +56,24 @@ public class MySQL {
         }
         return list;
     }
+
+    public String getPopulation(String name) {
+        String population="";
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "SELECT JSON_EXTRACT(Info,\"$.Population\") as pop"+
+                    " FROM city where name = '"+name+"'";
+            System.out.println(query);
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                population=rs.getString("pop");
+            }
+
+        }catch(Exception ex){
+            System.out.println("Error: "+ ex.getMessage());
+        }
+        return population;
+    }
 }
