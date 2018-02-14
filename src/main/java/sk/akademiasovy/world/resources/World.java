@@ -61,11 +61,13 @@ public class World {
 
     @POST
     @Path("/population")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getPopulation(City city) {
 
          String population=new MySQL().getPopulation(city.name);
-         return population;
+         String ret= "showPopulation({\"population\":\""+population+"\"})";
+        System.out.println(city.name+" > > > "+ret);
+        return ret;
     }
 
     public static class City{
