@@ -6,6 +6,9 @@ import sk.akademiasovy.world.db.MySQL;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,6 +37,7 @@ public class World {
         }
         result+="]})";
 
+
         return result;
     }
 
@@ -56,7 +60,23 @@ public class World {
         }
         result+="]})";
 
+        writeCitiesIntoFile(country+".txt", list);
+
         return result;
+    }
+
+    private void writeCitiesIntoFile(String s, List<String> list) {
+        try{
+           File file=new File(s);
+            FileWriter fw=new FileWriter(file);
+            for(String city:list){
+                fw.write(city+"  ");
+            }
+            fw.flush();
+            fw.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @POST
